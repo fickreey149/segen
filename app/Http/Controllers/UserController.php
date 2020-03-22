@@ -41,7 +41,7 @@ class UserController extends Controller
 			'name' => 'required|max:255',
 			'email' => 'required|email|max:100|unique:users',
 			'password' => 'required|min:6',
-			'level' => 'required|in:admin,gudang,pelanggan,kasir'
+			'level' => 'required|in:admin,juru kamera,pelanggan,kasir'
 		]);
 
 		if ($validator->fails()) {
@@ -73,7 +73,7 @@ class UserController extends Controller
 			'name' => 'required|max:255',
 			'email' => 'required|email|max:100',
 			'password' => 'required|min:6',
-			'level' => 'required|in:admin,gudang,pelanggan,kasir'
+			'level' => 'required|in:admin,juru kamera,pelanggan,kasir'
 		]);
 
 		if ($validator->fails()) {

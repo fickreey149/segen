@@ -37,7 +37,7 @@
 	</div>
 
 	<div class="radio">
-	<label>{!! Form::radio('level', 'gudang') !!}Gudang</label>
+	<label>{!! Form::radio('level', 'juru kamera') !!}Juru Kamera</label>
 	</div>
 
 	<div class="radio">

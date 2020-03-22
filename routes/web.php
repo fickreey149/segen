@@ -66,6 +66,8 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('pemesanan/{pemesanan}/hapus', 'PemesananController@hapus');
 	Route::resource('pemesanan', 'PemesananController');
 
+	Route::resource('jadwal', 'PenjadwalanController');
+
 	Route::post('pemesanan/ganti', 'PemesananController@ganti');
 	Route::patch('pemesanan/ganti/{pemesanan}', 'PemesananController@baru');
 

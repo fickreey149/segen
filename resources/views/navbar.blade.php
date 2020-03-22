@@ -46,6 +46,15 @@
 		</ul>
 		@endif
 
+		@if (Auth::check() && Auth::user()->level == 'juru kamera')
+		<ul class="nav navbar-nav">
+			<li><a href="{{ url('jadwal') }}">Daftar Job</a></li>
+		</ul>
+		<ul class="nav navbar-nav">
+			<li><a href="{{ url('jadwal') }}">Jadwal</a></li>
+		</ul>
+		@endif
+
 		@if (Auth::check() && Auth::user()->level == 'admin')
 		<ul class="nav navbar-nav">
 			<li class="dropdown">
@@ -64,7 +73,7 @@
 		        <ul class="dropdown-menu">
 					<li><a href="{{ url('penjualan') }}">Penjualan Produk</a></li>
 					<li><a href="{{ url('cart') }}">Keranjang Pesanan <span class="badge badge-light">{{Cart::count()}}</span></a></li>
-					<li><a href="{{ url('pemesanan') }}">Daftar Pesanan</a></li>
+					<li><a href="{{ url('jadwal') }}">Penjadwalan</a></li>
 			        <li><a href="{{ url('aktivasi') }}">Aktivasi Produk</a></li>
 	        	</ul>
       		</li>
