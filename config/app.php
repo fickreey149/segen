@@ -138,7 +138,6 @@ return [
     'providers' => [
 
         
-        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
@@ -162,6 +161,12 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+
+        //Shopping Cart
+        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
+
+        //Full Calendar
+        MaddHatter\LaravelFullcalendar\ServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -227,7 +232,12 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+
+        //Shopping Cart
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
+
+        //Full Calendar
+        'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
 
     ],
 
