@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
+use Illuminate\Support\Facades\Crypt;
 use Auth;
 use Validator;
 use Session;
@@ -61,6 +62,7 @@ class UserController extends Controller
 	public function edit($id)
 	{
 		$user = User::findOrFail($id);
+
 		return view('user.edit', compact('user'));
 	}
 

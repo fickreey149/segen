@@ -1,10 +1,10 @@
 @extends('template')
 
 @section('main')
-	<div id="produk">
-		<h2>Tambah Produk</h2>
-	{!! Form::open(['url'=>'produk', 'files'=>'true']) !!}
-		@include('produk.form', ['submitButtonText' => 'Tambah Produk'])
+	<div id="jurkam">
+		<h2>Tambah Juru Kamera</h2>
+	{!! Form::open(['url'=>'jurkam', 'files'=>'true']) !!}
+		@include('jurkam.form', ['submitButtonText' => 'Tambah Juru Kamera'])
 	{!! Form::close() !!}
 
 @stop

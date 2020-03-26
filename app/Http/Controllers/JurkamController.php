@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Produk;
+use App\Jurkam;
+use App\User;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Session;
 use Validator;
@@ -14,33 +15,37 @@ class JurkamController extends Controller
 {
 	public function daftar()
 	{
-		$produk_list = Produk::all();
-		$jumlah_produk = Produk::count();
-		return view('produk.daftar', compact('produk_list', 'jumlah_produk'));
+		$jurkam_list = Jurkam::all();
+		$jumlah_jurkam = Jurkam::count();
+		return view('jurkam.daftar', compact('jurkam_list', 'jumlah_jurkam'));
 	}
 
 	public function index()
 	{
-		return view('jurkam.index');
+		$jurkam_list = Jurkam::orderBy('nama_jurkam', 'asc')->paginate(10);
+		$jumlah_jurkam = Jurkam::count();
+		return view('jurkam.index', compact('jurkam_list', 'jumlah_jurkam'));
 	}
 
 	public function show($id)
 	{
-		$produk = Produk::findOrFail($id);
-		return view('produk.show', compact('produk'));
+		$jurkam = Jurkam::findOrFail($id);
+		return view('jurkam.show', compact('jurkam'));
 	}
 
 	public function create()
 	{
-		$list_kategori = ['wedding', 'sunatan', 'rapat', 'umum'];
+		$list_kategori = ['fotografi', 'vidiografi'];
+		$list_gender = ['Laki-laki', 'Perempuan'];
 		
-		return view('produk.create', compact('list_kategori'));
+		return view('jurkam.create', compact('list_kategori', 'list_gender'));
 	}
 
 	public function store(Request $request)
 	{
 		$input = $request->all();
-		$list_kategori = ['wedding', 'sunatan', 'rapat', 'umum'];
+		$list_gender = ['Laki-laki', 'Perempuan'];
+		$list_kategori = ['fotografi', 'vidiografi'];
 
 
 		if ($request->hasFile('foto')) {
@@ -56,38 +61,61 @@ class JurkamController extends Controller
 		}
 
 		$validator = Validator::make($input, [
-			'nama_produk' => 'required|string|max:20',
-			'harga_produk' => 'required|string',
-			'satuan_produk' => 'required|string',
-			'stok_produk' => 'required|string',
-			'kategori_produk' => 'required|string',
+			'nama_jurkam' => 'required|string|max:40',
+			'nik' => 'required|string',
+			'alamat' => 'required|string|max:200',
+			'gender' => 'required|string',
+			'no_hp' => 'required|string',
 			'foto' => 'sometimes|max:5000',
-			'deskripsi' => 'sometimes|max:500',
+			'tanggal_lahir' => 'required|date',
+			'tempat_lahir' => 'required|string',
+			'kategori' => 'required|string',
+
+			'email' => 'required|email|max:100|unique:users',
+			'password' => 'required|min:6',
+			'level' => 'required|in:admin,jurkam,pelanggan,kasir'
 
 		]);
+
 		if ($validator->fails()) {
-			return redirect('produk/create')
+			return redirect('jurkam/create')
 				->withInput()
 				->withErrors($validator);
 		}
-		$produk = Produk::create(
-			[
-			'nama_produk' => $request->nama_produk,
-			'harga_produk' => $request->harga_produk,
-			'satuan_produk' => $request->satuan_produk,
-			'stok_produk' => $request->stok_produk,
-			'kategori_produk' => $list_kategori[$request->kategori_produk],
-			'foto' => $input['foto'],
-			'deskripsi' => $request->deskripsi,
-			]);
 
-		return redirect('produk');
+		if (
+			$user = User::create([
+				'name' => $request->nama_jurkam,
+				'email' => $request->email,
+				'password' => bcrypt($input['password']),
+				'level' => $request->level,
+			])
+		) {
+			$user_id = $user->id;
+		}
+
+		$jurkam = Jurkam::create(
+			[
+				'nama_jurkam' => $request->nama_jurkam,
+				'nik' => $request->nik,
+				'alamat' => $request->alamat,
+				'gender' => $list_gender[$request->gender],
+				'no_hp' => $request->no_hp,
+				'foto' => $input['foto'],
+				'tanggal_lahir' => $request->tanggal_lahir,
+				'tempat_lahir' => $request->tempat_lahir,
+				'kategori' => $request->kategori,
+				'user_id' => $user_id,
+			]);
+		
+
+		return redirect('jurkam');
 	}
 
 	public function edit($id)
 	{
 		$list_kategori = ['spare part', 'printer', 'pc', 'laptop'];
-		$produk = Produk::findOrFail($id);
+		$jurkam = Produk::findOrFail($id);
 		return view('produk.edit', compact('produk', 'list_kategori'));
 	}
 
@@ -138,27 +166,4 @@ class JurkamController extends Controller
 		return redirect('produk');
 	}
 
-	public function aktivasi()
-	{
-		$produk_list = Produk::orderBy('nama_produk', 'asc')->paginate(10);
-		$jumlah_produk = Produk::count();
-		return view('produk.aktivasi', compact('produk_list', 'jumlah_produk'));
-	}
-
-	public function updateaktivasi($id, Request $request)
-	{
-		$produk = Produk::findOrFail($id);
-
-		$input = [
-			'nama_produk' => $produk->nama_produk,
-			'harga_produk' => $produk->harga_produk,
-			'satuan_produk' => $produk->satuan_produk,
-			'kategori_produk' => $produk->kategori_produk,
-			'foto' => $produk->foto,
-			'deskripsi' => $produk->deskripsi,
-			'stok_produk' => $request->status,
-				];
-		$produk->update($input);
-		return redirect('aktivasi');
-	}	
 }

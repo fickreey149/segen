@@ -31,4 +31,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Penjualan::class);
     }
+
+    public function jurkam()
+    {
+        return $this->hasMany(Jurkam::class);
+    }
 }

@@ -17,6 +17,8 @@ class CreatePenjualanProdukTable extends Migration
             $table->increments('id');
             $table->string('jumlah');
             $table->string('status');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->integer('penjualan_id')->unsigned();
             $table->integer('produk_id')->unsigned();
             $table->timestamps();

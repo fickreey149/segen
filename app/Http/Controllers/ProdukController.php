@@ -34,7 +34,7 @@ class ProdukController extends Controller
 
 	public function create()
 	{
-		$list_kategori = ['wedding', 'sunatan', 'rapat', 'umum'];
+		$list_kategori = ['fotografi', 'vidiografi'];
 		
 		return view('produk.create', compact('list_kategori'));
 	}
@@ -42,7 +42,7 @@ class ProdukController extends Controller
 	public function store(Request $request)
 	{
 		$input = $request->all();
-		$list_kategori = ['wedding', 'sunatan', 'rapat', 'umum'];
+		$list_kategori = ['fotografi', 'vidiografi'];
 
 
 		if ($request->hasFile('foto')) {
@@ -61,7 +61,8 @@ class ProdukController extends Controller
 			'nama_produk' => 'required|string|max:20',
 			'harga_produk' => 'required|string',
 			'satuan_produk' => 'required|string',
-			'stok_produk' => 'required|string',
+			'status' => 'required|string',
+			'limit' => 'required|integer',
 			'kategori_produk' => 'required|string',
 			'foto' => 'sometimes|max:5000',
 			'deskripsi' => 'sometimes|max:500',
@@ -77,7 +78,8 @@ class ProdukController extends Controller
 			'nama_produk' => $request->nama_produk,
 			'harga_produk' => $request->harga_produk,
 			'satuan_produk' => $request->satuan_produk,
-			'stok_produk' => $request->stok_produk,
+			'status' => $request->status,
+			'limit' => $request->limit,
 			'kategori_produk' => $list_kategori[$request->kategori_produk],
 			'foto' => $input['foto'],
 			'deskripsi' => $request->deskripsi,
@@ -88,7 +90,7 @@ class ProdukController extends Controller
 
 	public function edit($id)
 	{
-		$list_kategori = ['spare part', 'printer', 'pc', 'laptop'];
+		$list_kategori = ['fotografi', 'vidiografi'];
 		$produk = Produk::findOrFail($id);
 		return view('produk.edit', compact('produk', 'list_kategori'));
 	}
@@ -120,6 +122,8 @@ class ProdukController extends Controller
 			'harga_produk' => 'required|string',
 			'satuan_produk' => 'required|string',
 			'kategori_produk' => 'required|string',
+			'status' => 'required|string',
+			'limit' => 'required|integer',
 			'foto' => 'sometimes|max:5000',
 			'deskripsi' => 'sometimes|max:500',
 		]);
@@ -158,7 +162,8 @@ class ProdukController extends Controller
 			'kategori_produk' => $produk->kategori_produk,
 			'foto' => $produk->foto,
 			'deskripsi' => $produk->deskripsi,
-			'stok_produk' => $request->status,
+			'status' => $request->status,
+			'limit' => $produk->limit,
 				];
 		$produk->update($input);
 		return redirect('aktivasi');

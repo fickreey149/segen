@@ -12,14 +12,10 @@
 				<td>: {{ $penjualan->kode_jual }}</td>
 				<th></th>
 				<td></td>
-		@if (Auth::check() && Auth::user()->level == 'pelanggan')
 
-				<th>Nama Konsumen</th>
-		@else
-				<th>Nama Kasir</th>
-		@endif
+				<th>Nama Acara</th>
 
-				<td>: {{ $penjualan->nama_konsumen }}</td>
+				<td>: </td>
 				<td width="100px"></td>
 
 				<td>
@@ -29,14 +25,21 @@
 						{{ link_to('pemesanan/' . $penjualan->id . '/hapus', 'Batal', ['class' => 'btn btn-danger btn-sm']) }}
 					</div>
 
-					@else
+					@endif
 
 					<div class="box-button">
-						
-						{!! Form::submit('Lunas', ['class' => 'btn btn-warning btn-sm']) !!}
+						{{ link_to('pembayaran/' . $penjualan->id . , 'Bayar', ['class' => 'btn btn-warning btn-sm']) }}
+					</div>
+
+					@if ($penjualan->status == "9")
+
+					<div class="box-button">
+						{{ link_to('pembayaran/' . $penjualan->id . '/hapus', 'Lunas', ['class' => 'btn btn-warning btn-sm']) }}
 					</div>
 
 					@endif
+
+
 				</td>
 			</tr>
 			<tr>
@@ -45,7 +48,7 @@
 				<th></th>
 				<td></td>
 				<th>Tanggal Acara</th>
-				<td>: 01-04-09</td>
+				<td>: </td>
 			</tr>
 			
 		</table>
@@ -61,9 +64,7 @@
 			$no = 1;
 			?>
 			@foreach ($penjualan->orderItems as $item)
-			<?php if ($item->pivot->status == 0) {
-							$s = "Lunas";
-						}?>
+			
 			<tr>
 				<td>{{ $no++ }}</td>
 				<td>{{ $item->nama_produk }}</td>
@@ -93,7 +94,7 @@
 	
 		</div>
 	</div>
-{!! Form::close() !!}
+
 @stop
 
 @section('footer')

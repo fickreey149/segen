@@ -18,7 +18,7 @@ class CreatePenjualansTable extends Migration
             $table->string('kode_jual')->unique();
             $table->date('tanggal_penjualan');
             $table->string('status', 3);
-            $table->string('nama_konsumen', 20);
+            $table->string('nama_acara');
             $table->string('total_bayar');
             $table->integer('user_id')->unsigned();
             $table->timestamps();

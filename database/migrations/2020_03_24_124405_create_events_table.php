@@ -13,7 +13,16 @@ class CreateEventsTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('events', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('tittle');
+            $table->string('color');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->integer('penjualan_id')->unsigned();
+            $table->integer('jurkam_id')->unsigned();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +32,6 @@ class CreateEventsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('events');
     }
 }

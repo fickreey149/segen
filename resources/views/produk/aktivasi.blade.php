@@ -22,7 +22,7 @@
 						$no = 0;
 					?>
 					<?php foreach ($produk_list as $produk):
-						if ($produk->stok_produk == 0) {
+						if ($produk->status == 0) {
 							$status = "Not Actived";
 							$b = "Active";
 							$v = 1;

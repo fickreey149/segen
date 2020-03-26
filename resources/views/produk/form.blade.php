@@ -28,7 +28,7 @@
 	@endif
 </div>
 <div>
-	<input type="hidden" name="stok_produk" value="0">
+	<input type="hidden" name="status" value="0">
 </div>
 		
 
@@ -54,6 +54,18 @@
 	{!! Form::select('kategori_produk', $list_kategori, null, ['class' => 'form-control', 'id' => 'kategori_produk', 'placeholder' => 'Pilih Kategori']) !!}
 	@if ($errors->has('kategori_produk'))
 	<span class="help-block">{{ $errors->first('kategori_produk') }}</span>
+	@endif
+</div>
+
+@if ($errors->any())
+<div class="form-group {{ $errors->has('limit') ? 'has-error' : 'has-success' }}">
+@else
+<div class="form-group">
+@endif
+	{!! Form::label('limit', 'Limit Waktu Eksekusi Produk :', ['class' => 'control-label']) !!}
+	{!! Form::text('limit', null, ['class' => 'form-control']) !!}
+	@if ($errors->has('limit'))
+	<span class="help-block">{{ $errors->first('limit') }}</span>
 	@endif
 </div>
 		
