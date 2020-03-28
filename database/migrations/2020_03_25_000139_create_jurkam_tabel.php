@@ -18,7 +18,7 @@ class CreateJurkamTabel extends Migration
             $table->string('nama_jurkam', 20);
             $table->string('nik');
             $table->string('alamat', 70);
-            $table->string('gender');
+            $table->enum('gender', ['Laki-laki', 'Perempuan']);
             $table->string('no_hp');
             $table->date('tanggal_lahir');
             $table->string('tempat_lahir');

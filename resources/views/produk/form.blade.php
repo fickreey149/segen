@@ -5,9 +5,9 @@
 <table>
 	
 @if ($errors->any())
-<div class="form-group {{ $errors->has('nama_produk') ? 'has-error' : 'has-success' }}">
+<div class="form-group {{ $errors->has('nama_produk') ? 'has-error' : 'has-success' }} col-md-6">
 @else
-<div class="form-group">
+<div class="form-group col-md-6">
 @endif
 	{!! Form::label('nama_produk', 'Nama Produk :', ['class' => 'control-label']) !!}
 	{!! Form::text('nama_produk', null, ['class' => 'form-control']) !!}
@@ -17,9 +17,9 @@
 </div>
 		
 @if ($errors->any())
-<div class="form-group {{ $errors->has('harga_produk') ? 'has-error' : 'has-success' }}">
+<div class="form-group {{ $errors->has('harga_produk') ? 'has-error' : 'has-success' }} col-md-6">
 @else
-<div class="form-group">
+<div class="form-group col-md-6">
 @endif
 	{!! Form::label('harga_produk', 'Harga Produk :', ['class' => 'control-label']) !!}
 	{!! Form::text('harga_produk', null, ['class' => 'form-control']) !!}
@@ -34,9 +34,9 @@
 
 	
 @if ($errors->any())
-<div class="form-group {{ $errors->has('satuan_produk') ? 'has-error' : 'has-success' }}">
+<div class="form-group {{ $errors->has('satuan_produk') ? 'has-error' : 'has-success' }} col-md-6">
 @else
-<div class="form-group">
+<div class="form-group col-md-6">
 @endif
 	{!! Form::label('satuan_produk', 'Satuan Produk :', ['class' => 'control-label']) !!}
 	{!! Form::text('satuan_produk', null, ['class' => 'form-control']) !!}
@@ -46,9 +46,9 @@
 </div>
 
 @if ($errors->any())
-<div class="form-group {{ $errors->has('kategori_produk') ? 'has-error' : 'has-success' }}">
+<div class="form-group {{ $errors->has('kategori_produk') ? 'has-error' : 'has-success' }} col-md-6">
 @else
-<div class="form-group">
+<div class="form-group col-md-6">
 @endif
 	{!! Form::label('kategori_produk', 'Kategori Produk :', ['class' => 'control-label']) !!}
 	{!! Form::select('kategori_produk', $list_kategori, null, ['class' => 'form-control', 'id' => 'kategori_produk', 'placeholder' => 'Pilih Kategori']) !!}
@@ -58,11 +58,11 @@
 </div>
 
 @if ($errors->any())
-<div class="form-group {{ $errors->has('limit') ? 'has-error' : 'has-success' }}">
+<div class="form-group {{ $errors->has('limit') ? 'has-error' : 'has-success' }} col-md-6">
 @else
-<div class="form-group">
+<div class="form-group col-md-6">
 @endif
-	{!! Form::label('limit', 'Limit Waktu Eksekusi Produk :', ['class' => 'control-label']) !!}
+	{!! Form::label('limit', 'Limit Waktu Eksekusi Produk (hari) :', ['class' => 'control-label']) !!}
 	{!! Form::text('limit', null, ['class' => 'form-control']) !!}
 	@if ($errors->has('limit'))
 	<span class="help-block">{{ $errors->first('limit') }}</span>
@@ -70,9 +70,9 @@
 </div>
 		
 @if ($errors->any())
-<div class="form-group {{ $errors->has('foto') ? 'has-error' : 'has-success' }}">
+<div class="form-group {{ $errors->has('foto') ? 'has-error' : 'has-success' }} col-md-6">
 @else
-<div class="form-group">
+<div class="form-group col-md-6">
 @endif
 	{!! Form::label('foto', 'Gambar :', ['class' => 'control-label']) !!}
 	{!! Form::file('foto', null, ['class' => 'form-control']) !!}
@@ -82,9 +82,9 @@
 </div>
 
 @if ($errors->any())
-<div class="form-group {{ $errors->has('deskripsi') ? 'has-error' : 'has-success' }}">
+<div class="form-group {{ $errors->has('deskripsi') ? 'has-error' : 'has-success' }} col-md-12">
 @else
-<div class="form-group">
+<div class="form-group col-md-12">
 @endif
 	{!! Form::label('deskripsi', 'Deskripsi Produk :', ['class' => 'control-label']) !!}
 	{!! Form::textarea('deskripsi', null, ['class' => 'form-control']) !!}

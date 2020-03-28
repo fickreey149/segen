@@ -114,21 +114,30 @@ class JurkamController extends Controller
 
 	public function edit($id)
 	{
-		$list_kategori = ['spare part', 'printer', 'pc', 'laptop'];
-		$jurkam = Produk::findOrFail($id);
-		return view('produk.edit', compact('produk', 'list_kategori'));
+		$list_gender = ['Laki-laki', 'Perempuan'];
+		$list_kategori = ['fotografi', 'vidiografi'];
+		$jurkam = Jurkam::findOrFail($id);
+		$user_id = $jurkam->user_id;
+		$user = User::findOrFail($user_id);
+
+		return view('jurkam.edit', compact('jurkam', 'list_kategori', 'list_gender', 'user'));
 	}
 
 	public function update($id, Request $request)
 	{
-		$produk = Produk::findOrFail($id);
+		$jurkam = Jurkam::findOrFail($id);
+		$user_id = $jurkam->user_id;
+		$user = User::findOrFail($user_id);
+		$list_gender = ['Laki-laki', 'Perempuan'];
+
+
 		$input = $request->all();
 
 		if ($request->hasFile('foto')) {
 
-			$exist = Storage::disk('foto')->exist($produk->foto);
-			if (isset($produk->foto) && $exist) {
-				$delete = Storage::disk('foto')->delete($produk->foto);
+			$exist = Storage::disk('foto')->exist($jurkam->foto);
+			if (isset($jurkam->foto) && $exist) {
+				$delete = Storage::disk('foto')->delete($jurkam->foto);
 			}
 
 		$foto = $request->file('foto');
@@ -139,31 +148,50 @@ class JurkamController extends Controller
 				$request->file('foto')->move($upload_path, $foto_name);
 				$input['foto'] = $foto_name;
 			}
+		} else {
+			$input['foto'] = $jurkam->foto;
 		}
 
+		$input['gender'] = $list_gender[$request->gender];
+
+		$input['name'] = $request->nama_jurkam;
+		$input['password'] = $user->password;
+
 		$validator = Validator::make($input, [
-			'nama_produk' => 'required|string|max:20',
-			'harga_produk' => 'required|string',
-			'satuan_produk' => 'required|string',
-			'kategori_produk' => 'required|string',
+			'nama_jurkam' => 'required|string|max:40',
+			'nik' => 'required|string',
+			'alamat' => 'required|string|max:200',
+			'gender' => 'required|string',
+			'no_hp' => 'required|string',
 			'foto' => 'sometimes|max:5000',
-			'deskripsi' => 'sometimes|max:500',
+			'tanggal_lahir' => 'required|date',
+			'tempat_lahir' => 'required|string',
+			'kategori' => 'required|string',
+
+			'email' => 'required|email|max:100',
 		]);
 		if ($validator->fails()) {
-			return redirect('produk/' . $id . '/edit')
+			return redirect('jurkam/' . $id . '/edit')
 				->withInput()
 				->withErrors($validator);
 		}
 
-		$produk->update($request->all());
-		return redirect('produk');
+		$jurkam->update($input);
+
+		$user->update($input);
+
+		return redirect('jurkam');
 	}
 
 	public function destroy($id)
 	{
-		$produk = Produk::findOrFail($id);
-		$produk->delete();
-		return redirect('produk');
+		$jurkam = Jurkam::findOrFail($id);
+		$user_id = $jurkam->user_id;
+		$user = User::findOrFail($user_id);
+		$jurkam->delete();
+		$user->delete();
+
+		return redirect('jurkam');
 	}
 
 }

@@ -55,10 +55,12 @@ class ProdukController extends Controller
 				$request->file('foto')->move($upload_path, $foto_name);
 				$input['foto'] = $foto_name;
 			}
+		} else {
+			$input['foto'] = "dummycamera.png";
 		}
 
 		$validator = Validator::make($input, [
-			'nama_produk' => 'required|string|max:20',
+			'nama_produk' => 'required|string|max:100',
 			'harga_produk' => 'required|string',
 			'satuan_produk' => 'required|string',
 			'status' => 'required|string',
@@ -98,6 +100,8 @@ class ProdukController extends Controller
 	public function update($id, Request $request)
 	{
 		$produk = Produk::findOrFail($id);
+		$list_kategori = ['fotografi', 'vidiografi'];
+
 		$input = $request->all();
 
 		if ($request->hasFile('foto')) {
@@ -115,7 +119,11 @@ class ProdukController extends Controller
 				$request->file('foto')->move($upload_path, $foto_name);
 				$input['foto'] = $foto_name;
 			}
+		} else {
+			$input['foto'] = $produk->foto;
 		}
+
+		$input['kategori_produk'] = $list_kategori[$request->kategori_produk];
 
 		$validator = Validator::make($input, [
 			'nama_produk' => 'required|string|max:20',
@@ -133,7 +141,7 @@ class ProdukController extends Controller
 				->withErrors($validator);
 		}
 
-		$produk->update($request->all());
+		$produk->update($input);
 		return redirect('produk');
 	}
 

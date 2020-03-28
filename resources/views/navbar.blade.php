@@ -46,7 +46,7 @@
 		</ul>
 		@endif
 
-		@if (Auth::check() && Auth::user()->level == 'juru kamera')
+		@if (Auth::check() && Auth::user()->level == 'jurkam')
 		<ul class="nav navbar-nav">
 			<li><a href="{{ url('jadwal') }}">Daftar Job</a></li>
 		</ul>
