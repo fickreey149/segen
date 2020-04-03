@@ -42,7 +42,8 @@ class PenjualanController extends Controller
 		$user = Auth::user();
 
 		$validator = Validator::make($input, [
-			'nama_konsumen' => 'required|string|max:20',
+			'alamat_acara' => 'required|string',
+			'nama_acara' => 'required|string',
 			'status' => 'required|string|max:2',
 			'tanggal_penjualan' => 'required|date',
 			'kode_jual' => 'required|string',
@@ -53,31 +54,33 @@ class PenjualanController extends Controller
 				->withErrors($validator);
 		}
 
+		$start_date = $request->start_date;
+		$end_date = $request->end_date;
+
+
 		$penjualan =  Penjualan::create([
 			'kode_jual' => $request->kode_jual,
 			'tanggal_penjualan' => $request->tanggal_penjualan,
 			'status' => $request->status,
 			'total_bayar' => Cart::total(),
-			'nama_konsumen' => $request->nama_konsumen,
+			'nama_acara' => $request->nama_acara,
+			'alamat_acara' => $request->alamat_acara,
 			'user_id' => $user->id
 		]);
+
 		
 
 		$cartItems = Cart::content();
+		$i = 0;
+
 		foreach ($cartItems as $cartItem) {
 			$penjualan->orderItems()->attach($cartItem->id, [
 				'jumlah' => $cartItem->qty,
 				'status' => 0,
+				'start_date' => $start_date[$i],
+				'end_date' => $end_date[$i],
 			]);
-			// $produk = Produk::find($cartItem->id);
-			// 	$produk->update([
-			// 		'id' => $produk->id,
-			// 		'nama_produk' => $produk->nama_produk,
-			// 		'harga_produk' => $produk->harga_produk,
-			// 		'satuan_produk' => $produk->satuan_produk,
-			// 		'stok_produk' => $produk->stok_produk - $cartItem->qty,
-			// 		'foto' => $produk->foto,
-			// 	]);
+			$i = $i+1;
 		}
 
 		Cart::destroy();

@@ -9,7 +9,7 @@ class Jual extends Model
     protected $table = 'penjualan_produk';
 
     protected $fillable = [
-    	'jumlah', 'produk_id', 'penjualan_id', 'status'
+    	'jumlah', 'produk_id', 'penjualan_id', 'status', 'start_date', 'end_date'
     ];
 
     public function produk()

@@ -19,6 +19,7 @@ class CreatePenjualansTable extends Migration
             $table->date('tanggal_penjualan');
             $table->string('status', 3);
             $table->string('nama_acara');
+            $table->string('alamat_acara', 800);
             $table->string('total_bayar');
             $table->integer('user_id')->unsigned();
             $table->timestamps();

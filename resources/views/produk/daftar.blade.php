@@ -26,7 +26,7 @@
 					@if (isset($produk->foto))
 						<img src="{{ asset('fotoupload/' .$produk->foto) }}" alt="" class="card-img-top" width="278px" height="190px" style="border-radius: 5px">
 					@else
-						<img src="{{ asset('fotoupload/dummyfood.png') }}" alt="" class="card-img-top" width="278px" height="190px" style="border-radius: 5px">
+						<img src="{{ asset('fotoupload/dummykamera.png') }}" alt="" class="card-img-top" width="278px" height="190px" style="border-radius: 5px">
 					@endif
 					<div class="card-body">
 						<h3 class="card-tittle" style="margin-left:10px">
@@ -39,7 +39,7 @@
 							Kategori : {{ $produk->kategori_produk }}
 						</p>
 						<div class="box-button" style="margin-top: 7px; margin-bottom: 7px; margin-left: 10px;"> 
-								{{ link_to('produk/' . $produk->id, 'Detail', ['class' => 'btn btn-success btn-sm']) }}
+								{{ link_to('produk/' . $produk->id, 'Detail', ['class' => 'btn btn-warning btn-sm']) }}
 						</div>
 					</div>
 				</div>

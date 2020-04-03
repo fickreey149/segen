@@ -9,7 +9,7 @@ class Penjualan extends Model
     protected $table = 'penjualans';
 
     protected $fillable = [
-    	'kode_jual', 'tanggal_penjualan', 'status', 'nama_konsumen', 'total_bayar', 'user_id'
+    	'kode_jual', 'tanggal_penjualan', 'status', 'nama_acara', 'alamat_acara', 'total_bayar', 'user_id'
     ];
 
     public function orderItems()

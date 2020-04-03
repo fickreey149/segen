@@ -22,8 +22,9 @@ class CartController extends Controller
         $kode = $jumlah_penjualan+1;
         $dt = Carbon::now();
         $now = $dt->toDateString();
+        $min = $dt->copy()->addDays(7)->toDateString();
 
-        return view('cart.index', compact('cartItems', 'kode', 'now'));
+        return view('cart.index', compact('cartItems', 'kode', 'now', 'min'));
     } 
 
     /**
