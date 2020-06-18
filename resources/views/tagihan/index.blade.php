@@ -6,8 +6,10 @@
 <script src="{{ asset ('js/jquery-1.4.4.min.js') }}"></script>
 	<script src="{{ asset ('js/jquery.printPage.js') }}"></script>
 	<div id="penjualan">
-		<h2>Detail Penjualan</h2>
+		<h2>Tagihan</h2>
+		@foreach ($penjualan_list as $penjualan)
 
+		<h3>Rincian Pesanan</h3>
 		<table class="table">
 			<tr>
 				<th>Kode Pemesanan</th>
@@ -65,20 +67,77 @@
 				<td></td>
 				<td></td>
 				<td></td>
-				<td><strong>Total Bayar :</strong></td>
+				<td></td>
+				<td><strong>Total Harga :</strong></td>
 				<td><strong>Rp {{ $penjualan->total_bayar }}</strong></td>
 			</tr>
 		</table>
+
+		<h3>Rincian Pembayaran</h3>
+		<table class="table">
+			<tr>
+				<th>No</th>
+				<th>Tanggal Pembayaran</th>
+				<th>Jumlah Bayar</th>
+				<th>Total Harga</th>
+				<th>Kekurangan</th>
+				<th>status</th>
+			</tr>
+
+			<?php
+				$nom = 1;
+				$total = 0;
+			?>
+
+
+			@foreach ($pembayaran_list as $pembayaran)
+			@if($pembayaran->penjualan_id == $penjualan->id)
+		
+			<tr>
+				<td>{{ $nom++ }}</td>
+				<td>{{ $pembayaran->tgl_bayar }}</td>	
+				<td>{{ $pembayaran->jumlah_bayar }}</td>	
+				<td>{{ $pembayaran->total_tagihan }}</td>	
+				<td>{{ $pembayaran->kekurangan}}</td>	
+				<td>{{ $pembayaran->status}}</td>	
+			</tr>
+			<?php
+				$total = $total+$pembayaran->jumlah_bayar;
+				$sisa_tagihan = $pembayaran->total_tagihan - $total;
+			?>
+			@endif
+			
+			@endforeach
+
+			<tr>
+				<td></td>
+				<td></td>
+				<td><strong>Total Bayar :</strong></td>
+				<td><strong>Rp {{ $total }}</strong></td>
+				<td><strong>Sisa Tagihan :</strong></td>
+				<td><strong>Rp {{ $sisa_tagihan }}</strong></td>
+			</tr>
+		</table>
+
 		<?php
 		$id=$penjualan->id;
 		?>
 
 		<div class="form-group">
-			{{ link_to('penjualan/' . $penjualan->id .'/print', ' Print', ['class' => 'btn btn-info glyphicon glyphicon-print pull-right']) }}
-</div>
+			{{ link_to('pembayaran/create/' . $penjualan->id, ' Bayar', ['class' => 'btn btn-info glyphicon glyphicon-print pull-right']) }}
+		</div>
+
+		<br class="hidden-print">
+
+		<div>
+			<h2></h2>
+		</div>
+
+		@endforeach
+
 <br class="hidden-print">
 <br class="hidden-print">
-	
+
 		</div>
 	</div>
 {!! Form::close() !!}

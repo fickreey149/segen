@@ -1,23 +1,23 @@
 @extends('template')
 
 @section('main')
-	<div id="produk">
-		<h2>Detail Produk</h2>
+	<div id="jurkam">
+		<h2>Detail Jurkam</h2>
 			<div class="container">
 				<div class="row">
 					<div class="col-md-6">
-						<img src="{{ asset('fotoupload/' .$produk->foto) }}" style="border: 1px solid #333; border-radius: 5px" alt="" class="img-responsive">
+						<img src="{{ asset('fotoupload/' .$jurkam->foto) }}" style="border: 1px solid #333; border-radius: 5px" alt="" class="img-responsive">
 					</div>
 					<div class="col-md-6">
-						<h3>{{ $produk->nama_produk }}</h3>
-						<h4>Rp {{ number_format($produk->harga_produk,0,".",".") }},-</h4>
-						<h5>Kategori : {{ $produk->kategori_produk }}</h5>
-						<p>Deskripsi : {{ $produk->deskripsi }} </p>
+						<h3>{{ $jurkam->nama_jurkam }}</h3>
+						<h4>Rp {{ number_format($jurkam->harga_jurkam,0,".",".") }},-</h4>
+						<h5>Kategori : {{ $jurkam->kategori_jurkam }}</h5>
+						<p>Deskripsi : {{ $jurkam->deskripsi }} </p>
 
 
 	<!--gadane wong <table class="table">
 			<tr>
-				<th>Nama Produk</th>
+				<th>Nama jurkam</th>
 				<td>: {{ $produk->nama_produk }}</td>
 				<th></th>
 				<td></td>

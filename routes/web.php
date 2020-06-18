@@ -46,6 +46,10 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::resource('jurkam', 'JurkamController');
 
+	Route::resource('tagihan', 'TagihanController');
+
+	
+
 	Route::get('daftar_produk', 'ProdukController@daftar');
 
 	Route::get('aktivasi', 'ProdukController@aktivasi');
@@ -67,6 +71,9 @@ Route::group(['middleware' => ['web']], function () {
 	Route::resource('pemesanan', 'PemesananController');
 
 	Route::resource('jadwal', 'PenjadwalanController');
+
+	Route::resource('pembayaran', 'PembayaranController');
+	Route::get('pembayaran/create/{pembayaran}', 'PembayaranController@create');
 
 	Route::post('pemesanan/ganti', 'PemesananController@ganti');
 	Route::patch('pemesanan/ganti/{pemesanan}', 'PemesananController@baru');

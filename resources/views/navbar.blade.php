@@ -71,8 +71,10 @@
 		        <a class="dropdown-toggle" data-toggle="dropdown" href="{{ url('penjualan') }}">Transaksi
 		        <span class="caret"></span></a>
 		        <ul class="dropdown-menu">
-					<li><a href="{{ url('penjualan') }}">Penjualan Produk</a></li>
+					<li><a href="{{ url('penjualan') }}">Pemesanan Produk</a></li>
 					<li><a href="{{ url('cart') }}">Keranjang Pesanan <span class="badge badge-light">{{Cart::count()}}</span></a></li>
+					<li><a href="{{ url('tagihan') }}">Tagihan</a></li>
+					<li><a href="{{ url('pembayaran') }}">Pembayaran</a></li>
 					<li><a href="{{ url('jadwal') }}">Penjadwalan</a></li>
 			        <li><a href="{{ url('aktivasi') }}">Aktivasi Produk</a></li>
 	        	</ul>

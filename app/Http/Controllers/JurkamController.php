@@ -58,6 +58,8 @@ class JurkamController extends Controller
 				$request->file('foto')->move($upload_path, $foto_name);
 				$input['foto'] = $foto_name;
 			}
+		} else {
+			$input['foto'] = "dummycamera.png";
 		}
 
 		$validator = Validator::make($input, [

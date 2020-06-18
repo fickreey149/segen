@@ -14,12 +14,17 @@ class Penjualan extends Model
 
     public function orderItems()
     {
-    	return $this->belongsToMany(Produk::class)->withPivot('jumlah', 'status');
+    	return $this->belongsToMany(Produk::class)->withPivot('jumlah', 'status', 'start_date');
     }
 
     public function jual()
     {
-    	return $this->hasMany('App\Jual', 'id_penjualan');
+    	return $this->hasMany('App\Jual', 'penjualan_id');
+    }
+
+    public function pembayaran()
+    {
+        return $this->hasMany('App\Pembayaran', 'penjualan_id');
     }
 
     public function user()

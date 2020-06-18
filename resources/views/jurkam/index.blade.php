@@ -35,9 +35,9 @@
 						<td>{{ $jurkam->no_hp }}</td>
 						<td>{{ $jurkam->kategori }}</td>
 						<td>
-							<div class="box-button">
+							<!-- <div class="box-button">
 								{{ link_to('jurkam/' . $jurkam->id, 'Detail', ['class' => 'btn btn-success btn-sm']) }}
-							</div>
+							</div> -->
 							<div class="box-button"> 
 								{{ link_to('jurkam/' . $jurkam->id. '/edit', 'Edit', ['class' => 'btn btn-warning btn-sm']) }}
 							</div>

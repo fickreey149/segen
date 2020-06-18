@@ -9,9 +9,9 @@
 				<thead>
 					<tr>
 						<th>No</th>
-						<th>Kode Penjualan</th>
-						<th>Tanggal Penjualan</th>
-						<th>Nama Konsumen</th>
+						<th>Kode Pemesanan</th>
+						<th>Tanggal Pemesanan</th>
+						<th>Acara</th>
 						<th>Total Bayar</th>
 						<th>Pelanggan</th>
 						<th>Action</th>
@@ -26,7 +26,7 @@
 						<td>{{ ++$no }}</td>
 						<td>{{ $jual->kode_jual }}</td>
 						<td>{{ $jual->tanggal_penjualan }}</td>
-						<td>{{ $jual->nama_konsumen }}</td>
+						<td>{{ $jual->nama_acara }}</td>
 						<td>Rp {{ $jual->total_bayar }}</td>
 						<td>{{ $jual->user->name }}</td>
 						<td>
